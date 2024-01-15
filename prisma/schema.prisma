@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String 
+  email String
+  firstName String
+  lastName String
+  joinedAt DateTime
+  role String
+  
+  @@id([id,role])
+}
+
+model Exam{
+  e_id String @id
+  u_id String
+  e_name String
+  e_description String
+  e_topic String
+  e_date DateTime
+  e_marks Int
+  e_duration Int
+  e_passing_marks Int
+  e_visibility String
+  e_medium String
+}
+
+enum Difficulty{
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Question{
+  q_id String @id
+  q_statement String
+  q_subsidiaries Json
+  q_difficulty Difficulty
+}
+
+model Exam_Question{
+  e_id String
+  q_id String
+  q_serial Int
+  q_marks Int
+  @@id([e_id,q_id])
+}
+
+model Answer{
+  q_id String @id
+  ans Json
+}

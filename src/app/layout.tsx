@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ConvexClientProvider from '@/provider/convex-client-provider'
 import GlobalAppProvider from '@/provider/global-app-provider'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ThemeProvider } from '@/provider/theme-provider'
@@ -23,9 +22,7 @@ export default function RootLayout ({
       <html lang='en' suppressHydrationWarning>
         <body className={inter.className}>
           <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
-            <ConvexClientProvider>
-              <GlobalAppProvider>{children}</GlobalAppProvider>
-            </ConvexClientProvider>
+            <GlobalAppProvider>{children}</GlobalAppProvider>
           </ThemeProvider>
         </body>
       </html>
