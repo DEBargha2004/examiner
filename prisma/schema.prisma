@@ -8,6 +8,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
@@ -19,6 +20,12 @@ model User {
   role String
   
   @@id([id,role])
+}
+
+enum ExamStatus{
+  UPCOMING
+  ONGOING
+  COMPLETED
 }
 
 model Exam{
@@ -33,6 +40,7 @@ model Exam{
   e_passing_marks Int
   e_visibility String
   e_medium String
+  e_status ExamStatus
 }
 
 enum Difficulty{
@@ -60,3 +68,6 @@ model Answer{
   q_id String @id
   ans Json
 }
+
+
+
